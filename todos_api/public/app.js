@@ -11,6 +11,9 @@ $(document).ready(function() {
   $('#todoInput').keypress(function() {
     if (event.which === 13) createTodo(); // 13 is the keycode for the enter key
   })
+  $('.list').on('click', 'span', function() {
+    removeTodo($(this).parent());
+  })
 })
 
 //displays all the todos on the page
@@ -21,8 +24,9 @@ function addTodos(todos) {
 //helper function to append a todo item to the list
 function addTodo(todo) {
     // let newTodo = $(`<li class="task">${todo.name}<li>`); // do not use this as it is adding an extra dot for each list
-   let newTodo = $('<li class="task">' + todo.name + '</li>');
+   let newTodo = $('<li class="task">' + todo.name +  '<span>X</span></li>');
     // newTodo.addClass('task'); could also do it this way
+    newTodo.data('id', todo._id); //store the id of each todo
     if (todo.completed === true) {
       newTodo.addClass('done');
     }
@@ -38,6 +42,22 @@ function createTodo() {
     addTodo(todo);
   })
   .catch (function(err) {
+    console.log(err);
+  })
+}
+
+//removes a Todo
+function removeTodo(todo) {
+  let clickedId = todo.data('id');
+  let deleteUrl = '/api/todos/' + clickedId;
+  $.ajax({
+    method: 'DELETE',
+    url: deleteUrl
+  })
+  .then(function(data) {
+    todo.remove();
+  })
+  .catch(function(err) {
     console.log(err);
   })
 }
