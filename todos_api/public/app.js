@@ -11,8 +11,12 @@ $(document).ready(function() {
   $('#todoInput').keypress(function() {
     if (event.which === 13) createTodo(); // 13 is the keycode for the enter key
   })
-  $('.list').on('click', 'span', function() {
+  $('.list').on('click', 'span', function(e) {
+    e.stopPropagation(); //stops the parent li to get triggered so it does not trigger when X is clicked
     removeTodo($(this).parent());
+  })
+  $('.list').on('click', 'li', function(e) {
+    updateTodo($(this));
   })
 })
 
@@ -27,6 +31,7 @@ function addTodo(todo) {
    let newTodo = $('<li class="task">' + todo.name +  '<span>X</span></li>');
     // newTodo.addClass('task'); could also do it this way
     newTodo.data('id', todo._id); //store the id of each todo
+    newTodo.data('completed', todo.completed); //store the completion state: true or false
     if (todo.completed === true) {
       newTodo.addClass('done');
     }
@@ -62,4 +67,20 @@ function removeTodo(todo) {
   })
 }
 
+function updateTodo(todo) {
+  // console.log(todo.data('completed')); //checking
+  let clickedId = todo.data('id');
+  let updateUrl = '/api/todos/' + clickedId;
+  let isDone = !todo.data('completed');
+  let updateData = {completed: isDone};
+  $.ajax({
+    method: 'PUT',
+    url: updateUrl,
+    data: updateData
+  })
+  .then(function(updatedTodo) {
+    todo.toggleClass('done');
+    todo.data('completed', isDone);
+  })
+}
   
