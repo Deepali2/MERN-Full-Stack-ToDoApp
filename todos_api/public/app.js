@@ -16,6 +16,9 @@ function addTodos(todos) {
     // let newTodo = $(`<li class="task">${todo.name}<li>`); // do not use this as it is adding an extra dot for each list
     let newTodo = $('<li class="task">' + todo.name + '</li>');
     // newTodo.addClass('task'); could also do it this way
+    if (todo.completed === true) {
+      newTodo.addClass('done');
+    }
     $('.list').append(newTodo);
   })
 }
