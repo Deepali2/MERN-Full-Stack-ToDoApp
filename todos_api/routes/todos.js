@@ -35,9 +35,19 @@ router.get('/:todoId', function(req, res) {
 })
 //Update Route
 router.put('/:todoId', function(req, res) {
-  db.Todo.findOneAndUpdate({_id: req.params.todoId}, req.body, {new:true})
+  db.Todo.findOneAndUpdate({_id: req.params.todoId}, req.body, {new:true}) //new true makes it respond with the new version
   .then(function(todo) {
     res.json(todo);
+  })
+  .catch(function(err) {
+    res.send(err);
+  })
+})
+//Delete Route
+router.delete('/:todoId', function(req, res) {
+  db.Todo.remove({_id: req.params.todoId})
+  .then(function() {
+    res.json({message: 'We deleted it!'});
   })
   .catch(function(err) {
     res.send(err);
