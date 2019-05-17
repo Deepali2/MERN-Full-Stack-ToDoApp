@@ -13,7 +13,15 @@ router.get('/', function(req, res) {
   })
 })
 
-
+router.post('/', function(req, res) {
+  db.Todo.create(req.body)//create the new todo
+  .then(function(newTodo) {//return the newly cerated to do item
+    res.status(201).json(newTodo);
+  })
+  .catch(function(err) {
+    res.send(err);
+  })
+})
 
 
 module.exports = router;
