@@ -58,7 +58,8 @@ class TodoList extends Component{
     ));
     return(
       <div>
-         <h1>Todo List</h1>
+         <h1>todo <span>list</span></h1>
+         <h2>A MERN(MongoDB, Express, React, Node.js) full stack app</h2>
          <TodoForm addTodo={this.addTodo}/>
          <ul>{todos}</ul>        
        </div>
