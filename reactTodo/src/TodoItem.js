@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TodoItem = ({name, completed}) => {
+const TodoItem = ({name, completed, onDelete}) => {
   return (
     <li
       style={{
@@ -8,6 +8,7 @@ const TodoItem = ({name, completed}) => {
       }}
     >
       {name}
+      <span onClick={onDelete}> X </span>
     </li>
   )
 }
