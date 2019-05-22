@@ -60,6 +60,7 @@ class TodoList extends Component{
       <div>
          <h1>todo <span>list</span></h1>
          <h2>A MERN(MongoDB, Express, React, Node.js) full stack app</h2>
+         <p>Designed and Maintained by deepaligarg1001@gmail.com</p>
          <TodoForm addTodo={this.addTodo}/>
          <ul>{todos}</ul>        
        </div>
