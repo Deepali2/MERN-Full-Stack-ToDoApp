@@ -17,6 +17,6 @@ app.get('/', function(req, res) {
 app.use('/api/todos', todoRoutes); // sets the '/' to mean '/api/todos'
 
 
-app.listen(PORT, function() {
+app.listen(PORT, process.env.IP, function() {
   console.log(`todosApi node listening on port ${PORT}`)
 });
