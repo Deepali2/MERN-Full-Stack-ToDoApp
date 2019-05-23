@@ -10,7 +10,7 @@
     "express": "^4.16.4",
     "mongoose": "^5.5.8"
   },
- 
+  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
