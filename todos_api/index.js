@@ -4,6 +4,17 @@ const express = require ('express'),
    bodyParser = require('body-parser'),
    PORT       = process.env.PORT||3001;
 
+  app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "http://merntodolist.herokuapp.com"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.use(express.static(__dirname + '/public')); //renders the css file to the index.html file
 app.use(express.static(__dirname + '/views'));//renders the index.html page in the views directory
 app.use(bodyParser.urlencoded({extended: true}));
